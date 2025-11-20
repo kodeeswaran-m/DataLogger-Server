@@ -1,0 +1,121 @@
+// exports.createProspectDetail = async (req, res, next) => {
+//   try {
+//     const payload = req.body;
+
+//     // Basic required fields check (you can enhance with express-validator)
+//     if (!payload.month || !payload.quarter || !payload.prospect) {
+//       return res.status(400).json({ success: false, message: 'month, quarter and prospect are required' });
+//     }
+
+//     const opp = new ProspectDetail(payload);
+//     await opp.save();
+
+//     res.status(201).json({ success: true, data: opp });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+// exports.deleteProspectDetail = async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     const deleted = await ProspectDetail.findByIdAndDelete(id);
+//     if (!deleted)
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "ProspectDetail not found" });
+//     res.json({ success: true, message: "Deleted successfully" });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+
+
+
+// exports.getProspectDetails = async (req, res, next) => {
+//   try {
+//     const { page = 1, limit = 100, prospect, geo, rag } = req.query;
+//     const query = {};
+//     if (prospect) query.prospect = { $regex: prospect, $options: "i" };
+//     if (geo) query.geo = geo;
+//     if (rag) query.rag = rag;
+
+//     const pageNum = parseInt(page, 10) || 1;
+//     const limitNum = parseInt(limit, 10) || 20;
+//     const skip = (pageNum - 1) * limitNum;
+
+//     const [items, total] = await Promise.all([
+//       ProspectDetail.find(query).sort({ createdAt: -1 }).skip(skip).limit(limitNum),
+//       ProspectDetail.countDocuments(query),
+//     ]);
+
+//     res.json({ success: true, data: items, meta: { page: pageNum, limit: limitNum, total } });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+// exports.getProspectDetails = async (req, res, next) => {
+//   try {
+//     const {
+//       page = 1,
+//       limit = 20,
+//       search = "",
+//       geo = "",
+//       month = "",
+//       quarter = "",
+//       lob = "",
+//       rag = "",
+//     } = req.query;
+
+//     const query = {};
+
+//     // -----------------------------
+//     // Search (applied to multiple fields)
+//     // -----------------------------
+//     if (search) {
+//       query.$or = [
+//         { prospect: { $regex: search, $options: "i" } },
+//         { deck: { $regex: search, $options: "i" } },
+//         { geo: { $regex: search, $options: "i" } },
+//         { lob: { $regex: search, $options: "i" } },
+//       ];
+//     }
+
+//     // -----------------------------
+//     // Filters
+//     // -----------------------------
+//     if (geo) query.geo = geo;
+//     if (month) query.month = month;
+//     if (quarter) query.quarter = quarter;
+//     if (lob) query.lob = lob;
+//     if (rag) query.rag = rag;
+
+//     // -----------------------------
+//     // Pagination
+//     // -----------------------------
+//     const pageNum = parseInt(page, 10) || 1;
+//     const limitNum = parseInt(limit, 10) || 20;
+//     const skip = (pageNum - 1) * limitNum;
+
+//     const [items, total] = await Promise.all([
+//       ProspectDetail.find(query)
+//         .sort({ createdAt: -1 })
+//         .skip(skip)
+//         .limit(limitNum),
+
+//       ProspectDetail.countDocuments(query),
+//     ]);
+
+//     res.json({
+//       success: true,
+//       data: items,
+//       meta: { page: pageNum, limit: limitNum, total },
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+
+
