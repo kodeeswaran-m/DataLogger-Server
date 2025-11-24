@@ -9,6 +9,8 @@ router.get("/chart-data", controller.getCategoryGeoChartData);
 
 router.get("/chart-data-month", controller.getCategoryMonthChartData);
 
+router.get("/download", controller.downloadProspectDetails);
+
 // POST /api/prospectDetail → with file upload (field name: deck)
 router.post("/", upload.single("deck"), controller.createProspectDetail);
 
